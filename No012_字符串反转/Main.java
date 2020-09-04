@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		String string = scanner.nextLine();
-		StringBuilder sb = new StringBuilder(string);
-		sb.reverse();
-		System.out.println(sb);
+		while (scanner.hasNextLine()) {
+			String src = scanner.nextLine();
+			StringBuilder sb = new StringBuilder(src);
+			System.out.println(sb.reverse().toString());
+		}
+		scanner.close();
 	}
 }

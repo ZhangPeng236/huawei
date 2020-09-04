@@ -1,4 +1,4 @@
-package No079_字符串的相似度;
+package No052_计算字符串的距离;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class Main {
 		while (scanner.hasNextLine()) {
 			String charA = scanner.nextLine();
 			String charB = scanner.nextLine();
-			System.out.println(1 + "/" + (calStringDistance(charA, charB) + 1));
+			System.out.println(calStringDistance(charA, charB));
 		}
 		scanner.close();
 	}

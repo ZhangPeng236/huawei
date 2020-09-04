@@ -11,6 +11,7 @@ public class Main {
 			String ip2 = scanner.nextLine();
 			System.out.println(checkNetSegment(mask, ip1, ip2));
 		}
+		scanner.close();
 	}
 
 	public static int checkNetSegment(String mask, String ip1, String ip2) {
@@ -34,13 +35,11 @@ public class Main {
 			return 1;
 		} else {
 			for (int i = 0; i < 4; i++) {
-				if (Integer.valueOf(masks[i]) < 0 || Integer.valueOf(masks[i]) > 255 || Integer.valueOf(ip1s[i]) < 0
-						|| Integer.valueOf(ip1s[i]) > 255 || Integer.valueOf(ip2s[i]) < 0
+				if (Integer.valueOf(ip1s[i]) < 0 || Integer.valueOf(ip1s[i]) > 255 || Integer.valueOf(ip2s[i]) < 0
 						|| Integer.valueOf(ip2s[i]) > 255) {
 					return 1;
 				}
 			}
-
 			for (int i = 0; i < 4; i++) {
 				if ((Integer.valueOf(masks[i]) & Integer.valueOf(ip1s[i])) != (Integer.valueOf(masks[i])
 						& Integer.valueOf(ip2s[i]))) {

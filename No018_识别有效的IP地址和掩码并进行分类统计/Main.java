@@ -1,123 +1,99 @@
 package No018_识别有效的IP地址和掩码并进行分类统计;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-/**
- * decription:识别有效的IP地址和掩码并进行分类统计
- */
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-
-		int[] count = { 0, 0, 0, 0, 0, 0, 0 }; // 个数数组
-
+		ArrayList<String> list = new ArrayList<String>();
 		while (scanner.hasNext()) {
-			String str = scanner.nextLine();
-
-			String[] strings = str.split("~");
-			String ipStr = strings[0]; // ip
-			String codeStr = strings[1]; // 掩码
-
-			String[] ipCharStr = ipStr.split("\\.");
-			// 判断ip是否为空或者首字符是否等于0
-			Boolean isTrue = true;
-			int number = Integer.parseInt(ipCharStr[0]);
-			if (number == 0)
-				continue; // 为0直接跳出本次循环
-			else {
-				for (int i = 0; i < ipCharStr.length; i++) {
-					if (ipCharStr[i].length() <= 0 || ipCharStr[i] == "") {
-						isTrue = false;
-					}
-				}
-			}
-
-			// 如果ip地址正确判断掩码是否正确
-			if (isTrue) {
-				// 判断掩码是否正确
-				int[] codeRange = { 254, 252, 248, 240, 224, 192, 128, 0 };
-				List<Integer> list = Arrays.stream(codeRange).boxed().collect(Collectors.toList());// int数组转化为list
-				String[] codeCharStr = codeStr.split("\\.");
-
-				// 判断是否前面全为1后面全为0
-				if ("255".equals(codeCharStr[0])) {
-					if ("255".equals(codeCharStr[1])) {
-						if ("255".equals(codeCharStr[2])) {
-							if ("255".equals(codeCharStr[3])) {
-								isTrue = false;
-							} else if (list.contains(Integer.parseInt(codeCharStr[3]))) {
-								isTrue = true;
-							} else
-								isTrue = false;
-						} else if (list.contains(Integer.parseInt(codeCharStr[2]))) {
-							if (Integer.parseInt(codeCharStr[3]) == 0)
-								isTrue = true;
-							else
-								isTrue = false;
-						} else
-							isTrue = false;
-					} else if (list.contains(Integer.parseInt(codeCharStr[1]))) {
-						if (Integer.parseInt(codeCharStr[2]) == 0 && Integer.parseInt(codeCharStr[3]) == 0)
-							isTrue = true;
-						else
-							isTrue = false;
-					} else
-						isTrue = false;
-				} else if (list.contains(Integer.parseInt(codeCharStr[0]))) {
-					if (Integer.parseInt(codeCharStr[0]) == 0) {
-						isTrue = false;
-					} else {
-						if (Integer.parseInt(codeCharStr[1]) == 0 && Integer.parseInt(codeCharStr[2]) == 0
-								&& Integer.parseInt(codeCharStr[3]) == 0)
-							isTrue = true;
-						else
-							isTrue = false;
-					}
-
-				} else
-					isTrue = false;
-			}
-
-			// 调用方法判断地址范围和私网ip
-			if (isTrue) {
-				int first = Integer.parseInt(ipCharStr[0]);
-				int second = Integer.parseInt(ipCharStr[1]);
-				count = judgeIp(first, second, count);
-			} else {
-				count[5]++;
-			}
+			list.add(scanner.nextLine());
 		}
-
-		System.out.println(count[0] + " " + count[1] + " " + count[2] + " " + count[3] + " " + count[4] + " " + count[5]
-				+ " " + count[6]);
+		show(list);
+		list.clear();
+		scanner.close();
 	}
 
-	// 判断地址范围和私网ip
-	public static int[] judgeIp(int first, int second, int[] count) {
-		// 判断地址范围
-		if (first >= 1 && first <= 126)
-			count[0]++;
-		else if (first >= 128 && first <= 191)
-			count[1]++;
-		else if (first >= 192 && first <= 223)
-			count[2]++;
-		else if (first >= 224 && first <= 239)
-			count[3]++;
-		else if (first >= 240 && first <= 255)
-			count[4]++;
+	private static void show(ArrayList<String> list) {
+		int countA = 0;
+		int countB = 0;
+		int countC = 0;
+		int countD = 0;
+		int countE = 0;
+		int countError = 0;
+		int countPrivate = 0;
+		for (String src : list) {
+			String ip = src.split("~")[0];
+			String mask = src.split("~")[1];
+			if (ip.split("\\.").length != 4 || mask.split("\\.").length != 4) {
+				countError++;
+				continue;
+			}
+			String ip0;
+			String ip1;
+			String ip2;
+			String ip3;
+			String mask0;
+			String mask1;
+			String mask2;
+			String mask3;
+			try {
+				ip0 = Integer.toBinaryString(Integer.valueOf(ip.split("\\.")[0]));
+				ip1 = Integer.toBinaryString(Integer.valueOf(ip.split("\\.")[1]));
+				ip2 = Integer.toBinaryString(Integer.valueOf(ip.split("\\.")[2]));
+				ip3 = Integer.toBinaryString(Integer.valueOf(ip.split("\\.")[3]));
+				mask0 = Integer.toBinaryString(Integer.valueOf(mask.split("\\.")[0]));
+				mask1 = Integer.toBinaryString(Integer.valueOf(mask.split("\\.")[1]));
+				mask2 = Integer.toBinaryString(Integer.valueOf(mask.split("\\.")[2]));
+				mask3 = Integer.toBinaryString(Integer.valueOf(mask.split("\\.")[3]));
 
-		// 判断私网ip
-		if (first == 192 && second == 168)
-			count[6]++;
-		if (first == 10)
-			count[6]++;
-		if (first == 172) {
-			if (second >= 16 && second <= 31)
-				count[6]++;
+			} catch (NumberFormatException e) {
+				countError++;
+				continue;
+			}
+			ip0 = addZero(ip0);
+			ip1 = addZero(ip1);
+			ip2 = addZero(ip2);
+			ip3 = addZero(ip3);
+			mask0 = addZero(mask0);
+			mask1 = addZero(mask1);
+			mask2 = addZero(mask2);
+			mask3 = addZero(mask3);
+			long ipAll = Long.valueOf(ip0 + ip1 + ip2 + ip3, 2);
+			String maskAll = mask0 + mask1 + mask2 + mask3;
+			if (ipAll < 0L || ipAll > 256L * 256L * 256L * 256L - 1L || mask.equals("0.0.0.0")
+					|| mask.equals("255.255.255.255") || maskAll.indexOf("0") != maskAll.lastIndexOf("1") + 1) {
+				countError++;
+			} else if (ipAll >= 256L * 256L * 256L && ipAll <= 127L * 256L * 256L * 256L - 1L) {
+				countA++;
+				if (ipAll >= 10L * 256L * 256L * 256L && ipAll <= 11L * 256L * 256L * 256L - 1L) {
+					countPrivate++;
+				}
+			} else if (ipAll >= 128L * 256L * 256L * 256L && ipAll <= 192L * 256L * 256L * 256L - 1L) {
+				countB++;
+				if (ipAll >= (172L * 256L + 16L) * 256L * 256L && ipAll <= (172L * 256L + 32L) * 256L * 256L - 1L) {
+					countPrivate++;
+				}
+			} else if (ipAll >= 192L * 256L * 256L * 256L && ipAll <= 224L * 256L * 256L * 256L - 1L) {
+				countC++;
+				if (ipAll >= (192L * 256L + 168L) * 256L * 256L && ipAll <= (192L * 256L + 169L) * 256L * 256L - 1L) {
+					countPrivate++;
+				}
+			} else if (ipAll >= 224L * 256L * 256L * 256L && ipAll <= 240L * 256L * 256L * 256L - 1L) {
+				countD++;
+			} else if (ipAll >= 240L * 256L * 256L * 256L && ipAll <= 256L * 256L * 256L * 256L - 1L) {
+				countE++;
+			}
 		}
-		return count;
+		System.out.println(countA + " " + countB + " " + countC + " " + countD + " " + countE + " " + countError + " "
+				+ countPrivate);
+	}
+
+	private static String addZero(String s) {
+		while (s.length() < 8) {
+			s = "0" + s;
+		}
+		return s;
 	}
 }

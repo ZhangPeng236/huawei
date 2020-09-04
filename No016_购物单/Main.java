@@ -2,6 +2,16 @@ package No016_购物单;
 
 import java.util.Scanner;
 
+class Good {
+	int v;
+	int vp;
+
+	public Good(int v, int vp) {
+		this.v = v;
+		this.vp = vp;
+	}
+}
+
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -12,12 +22,10 @@ public class Main {
 		int[] f = new int[N + 1];
 		// 分组，goods[i][0]为主件，goods[i][1]为附件1，goods[i][2]为附件2
 		Good[][] goods1 = new Good[60][4];
-
 		for (int i = 1; i <= m; i++) {
 			int v = scanner.nextInt();
 			int p = scanner.nextInt();
 			int q = scanner.nextInt();
-
 			Good t = new Good(v, v * p);
 			if (q == 0) {
 				goods1[i][0] = t;
@@ -29,7 +37,6 @@ public class Main {
 				}
 			}
 		}
-
 		for (int i = 1; i <= m; i++) {
 			for (int j = N; j >= 0 && goods1[i][0] != null; j--) {
 				// 以下代码从分组中选择价值最大的。共五种情况：不选主件，选主件，选附件1和主件，选附件2和主件，选附件1和附件2和主件
@@ -53,17 +60,7 @@ public class Main {
 				f[j] = max;
 			}
 		}
-
 		System.out.println(f[N]);
-	}
-}
-
-class Good {
-	int v;
-	int vp;
-
-	public Good(int v, int vp) {
-		this.v = v;
-		this.vp = vp;
+		scanner.close();
 	}
 }

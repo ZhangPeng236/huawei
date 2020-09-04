@@ -1,31 +1,33 @@
 package No019_简单错误记录;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
-		Map<String, Integer> m = new LinkedHashMap<String, Integer>();
-		String tstr = null;
-		while ((tstr = cin.readLine()) != null && !tstr.equals("")) { // && !tstr.equals(""))没有性能影响
-			String[] str = tstr.split("\\s+");
-			String fname = str[0].substring(str[0].lastIndexOf("\\") + 1);
-			fname = fname.substring(Math.max(fname.length() - 16, 0)) + " " + str[1]; // max 最快推荐 ？：也可以 if太麻烦
-			Integer tmp = m.get(fname); // get==null较快写法
-			if (tmp == null)
-				m.put(fname, 1);
-			else
-				m.put(fname, tmp + 1);
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		LinkedHashMap<String, Integer> lhm = new LinkedHashMap<String, Integer>();
+		while (scanner.hasNextLine()) {
+			String src = scanner.nextLine();
+			String fileName = src.split("\\s+")[0];
+			String lineNumber = src.split("\\s+")[1];
+			String name = fileName.substring(fileName.lastIndexOf('\\') + 1);
+			name = name.length() > 16 ? name.substring(name.length() - 16) : name;
+			if (!lhm.containsKey(name + " " + lineNumber)) {
+				lhm.put(name + " " + lineNumber, 1);
+			} else {
+				lhm.put(name + " " + lineNumber, lhm.get(name + " " + lineNumber) + 1);
+			}
 		}
-		int cnt = 0;
-		for (Map.Entry<String, Integer> it : m.entrySet()) {
-			if (m.size() - cnt <= 8)
-				System.out.println(it.getKey() + " " + it.getValue());
-			cnt++;
+		Set<String> set = lhm.keySet();
+		int i = 0;
+		for (String s : set) {
+			if (set.size() - i <= 8) {
+				System.out.println(s + " " + lhm.get(s));
+			}
+			i++;
 		}
+		scanner.close();
 	}
 }

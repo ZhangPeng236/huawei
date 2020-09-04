@@ -1,4 +1,4 @@
-package No011_Êý×Öµßµ¹;
+package No055_Á·Ï°Ìâ_Ìô7;
 
 import java.util.Scanner;
 
@@ -7,12 +7,13 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNextInt()) {
 			int src = scanner.nextInt();
-			StringBuilder sb = new StringBuilder();
-			while (src > 0) {
-				sb.append(src % 10);
-				src /= 10;
+			int count = 0;
+			for (int i = 1; i <= src; i++) {
+				if (i % 7 == 0 || String.valueOf(i).contains("7")) {
+					count++;
+				}
 			}
-			System.out.println(sb.toString());
+			System.out.println(count);
 		}
 		scanner.close();
 	}

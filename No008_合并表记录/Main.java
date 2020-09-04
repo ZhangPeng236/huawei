@@ -1,29 +1,27 @@
 package No008_合并表记录;
 
-import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Main {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			int count = Integer.valueOf(sc.nextLine());
-			Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+			int count = scanner.nextInt();
+			TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
 			for (int i = 0; i < count; i++) {
-				String[] array = sc.nextLine().split(" ");
-				Integer key = Integer.valueOf(array[0]);
-				Integer num = Integer.valueOf(array[1]);
+				int key = scanner.nextInt();
+				int value = scanner.nextInt();
 				if (map.containsKey(key)) {
-					Integer value = map.get(key) + num;
-					map.put(key, value);
+					map.put(key, map.get(key) + value);
 				} else {
-					map.put(key, num);
+					map.put(key, value);
 				}
 			}
 			for (Integer key : map.keySet()) {
 				System.out.println(key + " " + map.get(key));
 			}
 		}
+		scanner.close();
 	}
 }

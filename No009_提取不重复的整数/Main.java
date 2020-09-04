@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		while (in.hasNext()) {
-			String str = in.nextLine();
-			String a = str.substring(str.length() - 1);
-			for (int i = str.length() - 2; i >= 0; i--) {
-				if (!a.contains(str.substring(i, i + 1)))
-					a += str.substring(i, i + 1);
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNextInt()) {
+			int src = scanner.nextInt();
+			String str = String.valueOf(src);
+			StringBuilder sb = new StringBuilder();
+			for (int i = str.length() - 1; i >= 0; i--) {
+				if (!sb.toString().contains(String.valueOf(str.charAt(i)))) {
+					sb.append(str.charAt(i));
+				}
 			}
-			System.out.println(a);
+			System.out.println(Integer.valueOf(sb.toString()));
 		}
+		scanner.close();
 	}
 }

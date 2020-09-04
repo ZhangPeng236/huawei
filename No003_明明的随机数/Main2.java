@@ -1,23 +1,21 @@
 package No003_明明的随机数;
 
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.TreeSet;
 
-public class Main {
+public class Main2 {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		TreeSet<Integer> numbers = new TreeSet<Integer>();
 		while (scanner.hasNextInt()) {
 			int n = scanner.nextInt();
-			int[] numbers = new int[n];
 			for (int i = 0; i < n; i++) {
-				numbers[i] = scanner.nextInt();
+				numbers.add(scanner.nextInt());
 			}
-			Arrays.sort(numbers);
-			for (int i = 0; i < n; i++) {
-				if (i == 0 || numbers[i] != numbers[i - 1]) {
-					System.out.println(numbers[i]);
-				}
+			for (int number : numbers) {
+				System.out.println(number);
 			}
+			numbers.clear();
 		}
 		scanner.close();
 	}

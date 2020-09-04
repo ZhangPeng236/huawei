@@ -5,9 +5,12 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		String str = scanner.nextLine();
-		String[] words = str.split("\\s+");
-		int len = words.length;
-		System.out.println(words[len - 1].length());
+		while (scanner.hasNextLine()) {
+			String src = scanner.nextLine();
+			String[] words = src.split(" ");
+			int len = words.length;
+			System.out.println(words[len - 1].length());
+		}
+		scanner.close();
 	}
 }
