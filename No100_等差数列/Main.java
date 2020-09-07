@@ -10,5 +10,6 @@ public class Main {
 			int n = Integer.valueOf(inputString);
 			System.out.println((3 * n * n + n) / 2);
 		}
+		scanner.close();
 	}
 }

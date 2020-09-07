@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] arge) {
-		Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			int i = sc.nextInt();
-			if (i != 0) {
-				System.out.println(i >> 1);
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNextInt()) {
+			int src = scanner.nextInt();
+			if (src == 0) {
+				System.exit(0);
 			} else {
-				break;
+				System.out.println(src >> 1);
 			}
 		}
+		scanner.close();
 	}
 }

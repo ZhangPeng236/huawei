@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		while (scanner.hasNext()) {
-			int count = Integer.valueOf(scanner.next());
+		while (scanner.hasNextInt()) {
+			int count = scanner.nextInt();
 			String[] strValue = new String[count];
 			for (int i = 0; i < count; i++) {
 				strValue[i] = scanner.next();
 				while (strValue[i].length() % 8 != 0) {
-					strValue[i] += "0";
+					strValue[i] = strValue[i] + "0";
 				}
 			}
 			for (int i = 0; i < count; i++) {
@@ -21,5 +21,6 @@ public class Main {
 				}
 			}
 		}
+		scanner.close();
 	}
 }

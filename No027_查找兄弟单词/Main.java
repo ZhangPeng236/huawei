@@ -7,37 +7,41 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		while (in.hasNext()) {
-			int num = in.nextInt();
-			String[] s = new String[num];
-			int count = 0;
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNextLine()) {
+			String src = scanner.nextLine();
+			String[] srcs = src.split("\\s+");
+			int num = Integer.valueOf(srcs[0]);
+			ArrayList<String> dic = new ArrayList<String>();
 			for (int i = 0; i < num; i++) {
-				s[i] = in.next();
+				dic.add(srcs[i + 1]);
 			}
-			String key = in.next();
-			char[] keyChar = key.toCharArray();
-			Arrays.sort(keyChar);
-			int no = in.nextInt();// µÚ¼¸¸ö
-			ArrayList<String> list = new ArrayList<String>();
-			for (int i = 0; i < num; i++) {
-				int c = check(key, s[i], keyChar);
-				count += c;
-				if (c == 1)
-					list.add(s[i]);
+			String key = srcs[num + 1];
+			int n = Integer.valueOf(srcs[num + 2]);
+
+			ArrayList<String> brothers = new ArrayList<String>();
+			for (String s : dic) {
+				if (brother(key, s)) {
+					brothers.add(s);
+				}
 			}
-			System.out.println(count);
-			Collections.sort(list);
-			if (count >= no)
-				System.out.println(list.get(no - 1));
+			System.out.println(brothers.size());
+			Collections.sort(brothers);
+			if (n <= brothers.size()) {
+				System.out.println(brothers.get(n - 1));
+			}
 		}
+		scanner.close();
 	}
 
-	private static int check(String key, String word, char[] keyChar) {
-		if (key.equals(word) || key.length() != word.length())
-			return 0;
-		char[] wordChar = word.toCharArray();
-		Arrays.sort(wordChar);
-		return Arrays.equals(keyChar, wordChar) ? 1 : 0;
+	private static boolean brother(String key, String word) {
+		if (key.equals(word) || key.length() != word.length()) {
+			return false;
+		}
+		char[] keys = key.toCharArray();
+		Arrays.sort(keys);
+		char[] words = word.toCharArray();
+		Arrays.sort(words);
+		return Arrays.equals(keys, words);
 	}
 }

@@ -7,11 +7,12 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNext()) {
-			String string = scanner.nextLine();
-			char[] chs = string.toCharArray();
+			String src = scanner.next();
+			char[] chs = src.toCharArray();
 			Arrays.sort(chs);
-			String newString = new String(chs);
-			System.out.println(newString);
+			String output = new String(chs);
+			System.out.println(output);
 		}
+		scanner.close();
 	}
 }

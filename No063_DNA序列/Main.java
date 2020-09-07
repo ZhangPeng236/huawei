@@ -15,6 +15,7 @@ public class Main {
 			int n = Integer.valueOf(scanner.next());
 			System.out.println(maxLength(src, n));
 		}
+		scanner.close();
 	}
 
 	private static String maxLength(String src, int n) {

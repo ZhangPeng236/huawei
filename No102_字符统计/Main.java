@@ -14,6 +14,7 @@ public class Main {
 			String src = scanner.nextLine();
 			System.out.println(sort(src));
 		}
+		scanner.close();
 	}
 
 	private static String sort(String src) {

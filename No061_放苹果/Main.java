@@ -10,6 +10,7 @@ public class Main {
 			int n = scanner.nextInt();
 			System.out.println(count(m, n));
 		}
+		scanner.close();
 	}
 
 	public static int count(int m, int n) {

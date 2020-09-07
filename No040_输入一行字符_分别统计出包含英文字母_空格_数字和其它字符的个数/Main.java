@@ -12,6 +12,7 @@ public class Main {
 			System.out.println(getNumberCharCount(string));
 			System.out.println(getOtherCharCount(string));
 		}
+		scanner.close();
 	}
 
 	public static int getEnglishCharCount(String str) {

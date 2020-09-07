@@ -9,5 +9,6 @@ public class Main_Key {
 			String input = scanner.next();
 			System.out.println(input.replaceAll("([0-9]+)", "*$1*"));
 		}
+		scanner.close();
 	}
 }

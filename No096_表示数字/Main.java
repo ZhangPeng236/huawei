@@ -9,6 +9,7 @@ public class Main {
 			String pInStr = scanner.nextLine();
 			System.out.println(markNum(pInStr));
 		}
+		scanner.close();
 	}
 
 	public static String markNum(String pInStr) {

@@ -3,67 +3,56 @@ package No029_×Ö·û´®¼Ó½âÃÜ;
 import java.util.Scanner;
 
 public class Main {
-
-	public static char encryption(char c) {
-		if (c >= 'a' && c < 'z')
-			return (char) (c + 1 - 32);
-		else if (c == 'z')
-			return 'A';
-		else if (c >= 'A' && c < 'Z')
-			return (char) (c + 1 + 32);
-		else if (c == 'Z')
-			return 'a';
-		else if (c >= '0' && c < '9')
-			return (char) (c + 1);
-		else if (c == '9')
-			return '0';
-		else
-			return c;
-	}
-
-	public static char decryption(char c) {
-		if (c > 'a' && c <= 'z')
-			return (char) (c - 1 - 32);
-		else if (c == 'a')
-			return 'Z';
-		else if (c > 'A' && c <= 'Z')
-			return (char) (c - 1 + 32);
-		else if (c == 'A')
-			return 'z';
-		else if (c > '0' && c <= '9')
-			return (char) (c - 1);
-		else if (c == '0')
-			return '9';
-		else
-			return c;
-	}
-
-	public static String enCryption(String s) {
-		char[] cs = s.toCharArray();
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < cs.length; i++) {
-			sb.append(encryption(cs[i]));
-		}
-		return sb.toString();
-	}
-
-	public static String deCryption(String s) {
-		char[] cs = s.toCharArray();
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < cs.length; i++) {
-			sb.append(decryption(cs[i]));
-		}
-		return sb.toString();
-	}
-
 	public static void main(String args[]) {
-		Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			String s1 = sc.nextLine();
-			String s2 = sc.nextLine();
-			System.out.println(enCryption(s1));
-			System.out.println(deCryption(s2));
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+			String src1 = scanner.next();
+			String src2 = scanner.next();
+			System.out.println(encrypt(src1));
+			System.out.println(unEncrypt(src2));
 		}
-		sc.close();
+		scanner.close();
+	}
+
+	private static String encrypt(String src1) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < src1.length(); i++) {
+			char temp = src1.charAt(i);
+			if (temp == 'z') {
+				sb.append('A');
+			} else if (temp == 'Z') {
+				sb.append('a');
+			} else if (temp == '9') {
+				sb.append('0');
+			} else if (temp >= 'a' && temp <= 'y') {
+				sb.append((char) (temp + 1 - 32));
+			} else if (temp >= 'A' && temp <= 'Y') {
+				sb.append((char) (temp + 1 + 32));
+			} else if (temp >= '0' && temp <= '8') {
+				sb.append((char) (temp + 1));
+			}
+		}
+		return sb.toString();
+	}
+
+	private static String unEncrypt(String src2) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < src2.length(); i++) {
+			char temp = src2.charAt(i);
+			if (temp == 'a') {
+				sb.append('Z');
+			} else if (temp == 'A') {
+				sb.append('z');
+			} else if (temp == '0') {
+				sb.append('9');
+			} else if (temp >= 'b' && temp <= 'z') {
+				sb.append((char) (temp - 1 - 32));
+			} else if (temp >= 'B' && temp <= 'Z') {
+				sb.append((char) (temp - 1 + 32));
+			} else if (temp >= '1' && temp <= '9') {
+				sb.append((char) (temp - 1));
+			}
+		}
+		return sb.toString();
 	}
 }

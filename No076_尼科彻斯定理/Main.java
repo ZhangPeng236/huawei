@@ -9,6 +9,7 @@ public class Main {
 			int m = scanner.nextInt();
 			System.out.println(getSequeOddNum(m));
 		}
+		scanner.close();
 	}
 
 	public static String getSequeOddNum(int m) {

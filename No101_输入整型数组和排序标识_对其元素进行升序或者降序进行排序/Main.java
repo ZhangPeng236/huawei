@@ -15,6 +15,7 @@ public class Main {
 			int iSortFlag = scanner.nextInt();
 			sortIntegerArray(pIntegerArray, iSortFlag);
 		}
+		scanner.close();
 	}
 
 	static void sortIntegerArray(Integer[] pIntegerArray, int iSortFlag) {

@@ -1,56 +1,48 @@
 package No030_字符串合并处理;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			String str_1 = sc.next();
-			String str_2 = sc.next();
-			String str = str_1 + str_2;
-			// 使用字符串，将转换关系对应如下
-			String st1 = "abcedfABCEDF0123456789";
-			String st2 = "5D37BF5D37BF084C2A6E19";
-			System.out.println(strChange(strSort(str), st1, st2));
-		}
-	}
-
-	public static String strChange(String str, String s1, String s2) {
-		char data[] = str.toCharArray();
-		for (int i = 0; i < data.length; i++) {
-			if ('0' <= data[i] && data[i] <= '9' || 'A' <= data[i] && data[i] <= 'F'
-					|| 'a' <= data[i] && data[i] <= 'f') {
-				for (int j = 0; j < s2.length(); j++) {
-					if (data[i] == s1.charAt(j)) {
-						data[i] = s2.charAt(j);
-						break;
-					}
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+			String src1 = scanner.next();
+			String src2 = scanner.next();
+			String src = src1 + src2;
+			LinkedList<Character> even = new LinkedList<Character>();
+			LinkedList<Character> odd = new LinkedList<Character>();
+			for (int i = 0; i < src.length(); i++) {
+				if (i % 2 == 0) {
+					even.add(src.charAt(i));
+				} else {
+					odd.add(src.charAt(i));
 				}
 			}
+			Collections.sort(even);
+			Collections.sort(odd);
+			StringBuilder sBuilder = new StringBuilder();
+			for (int i = 0; i < src.length(); i++) {
+				if (i % 2 == 0) {
+					sBuilder.append(even.removeFirst());
+				} else {
+					sBuilder.append(odd.removeFirst());
+				}
+			}
+			StringBuilder result = new StringBuilder();
+			String s1 = "abcdefABCDEF0123456789";
+			String s2 = "5D3B7F5D3B7F084C2A6E19";
+			for (int i = 0; i < src.length(); i++) {
+				int index = s1.indexOf(sBuilder.substring(i, i + 1));
+				if (index != -1) {
+					result.append(s2.charAt(index));
+				} else {
+					result.append(sBuilder.charAt(i));
+				}
+			}
+			System.out.println(result.toString());
 		}
-		return new String(data);
-	}
-
-//使用两个数组存储按奇数偶数排序后的两个字符数组
-	public static String strSort(String str) {
-		char data1[] = new char[str.length()];
-		char data2[] = new char[str.length()];
-		String sb = "";
-		int j = 0;
-		int m = 0;
-		for (int i = 0; i < str.length(); i++) {
-			if (i % 2 == 0) {
-				data1[j++] = str.charAt(i);
-			} else if (i % 2 == 1)
-				data2[m++] = str.charAt(i);
-		}
-		Arrays.sort(data1);
-		Arrays.sort(data2);
-		for (int i = 0; i < str.length(); i++) {
-			sb += (i % 2 == 0) ? data1[m++] : data2[j++];
-		}
-		return sb;
+		scanner.close();
 	}
 }

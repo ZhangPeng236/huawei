@@ -9,6 +9,7 @@ public class Main {
 			double input = scanner.nextDouble();
 			System.out.printf("%.1f\n", getCubeRoot(input));
 		}
+		scanner.close();
 	}
 
 	public static double getCubeRoot(double input) {

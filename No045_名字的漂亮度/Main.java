@@ -1,46 +1,51 @@
 package No045_Ãû×ÖµÄÆ¯ÁÁ¶È;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		while (scanner.hasNext()) {
-			int N = Integer.parseInt(scanner.nextLine());
-			String[] name = new String[N];
-			for (int i = 0; i < N; i++) {
-				name[i] = scanner.nextLine().toLowerCase();
+		while (scanner.hasNextLine()) {
+			int n = Integer.valueOf(scanner.nextLine());
+			String[] names = new String[n];
+			for (int i = 0; i < n; i++) {
+				names[i] = scanner.nextLine().toLowerCase();
 			}
-			for (int i = 0; i < N; i++) {
-				System.out.println(getPretty(name[i]));
+			for (int i = 0; i < n; i++) {
+				System.out.println(getPretty(names[i]));
 			}
 		}
+		scanner.close();
 	}
 
 	public static long getPretty(String name) {
 		HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
-		for (int x = 0; x < name.length(); x++) {
-			if (!hm.containsKey(name.charAt(x))) {
-				hm.put(name.charAt(x), 1);
+		for (int i = 0; i < name.length(); i++) {
+			if (!hm.containsKey(name.charAt(i))) {
+				hm.put(name.charAt(i), 1);
 			} else {
-				hm.put(name.charAt(x), hm.get(name.charAt(x)) + 1);
+				hm.put(name.charAt(i), hm.get(name.charAt(i)) + 1);
 			}
 		}
-		Collection<Integer> collection = hm.values();
-		int size = collection.size();
-		int[] counts = new int[size];
-		int temp = 0;
-		for (Integer integer : collection) {
-			counts[temp] = integer;
-			temp++;
-		}
-		Arrays.sort(counts);
+		ArrayList<Map.Entry<Character, Integer>> arrayList = new ArrayList<Map.Entry<Character, Integer>>(
+				hm.entrySet());
+		Collections.sort(arrayList, new Comparator<Map.Entry<Character, Integer>>() {
+			@Override
+			public int compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+				return o2.getValue().compareTo(o1.getValue());
+			}
+
+		});
 		long pretty = 0L;
-		for (int x = size - 1, y = 26; x >= 0; x--, y--) {
-			pretty += counts[x] * y;
+		int num = 26;
+		for (Map.Entry<Character, Integer> m : arrayList) {
+			pretty += m.getValue() * (num--);
 		}
 		return pretty;
 	}

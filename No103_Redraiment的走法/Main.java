@@ -17,6 +17,7 @@ public class Main {
 			List<Integer> pResult = new ArrayList<Integer>();
 			System.out.println(getResult(num, pInput, pResult));
 		}
+		scanner.close();
 	}
 
 	static int getResult(int num, int[] pInput, List<Integer> pResult) {

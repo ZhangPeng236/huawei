@@ -10,6 +10,7 @@ public class Main {
 			System.out.println(getTotal(height, 5));
 			System.out.println(getLast(height, 5));
 		}
+		scanner.close();
 	}
 
 	public static double getTotal(int height, int times) {

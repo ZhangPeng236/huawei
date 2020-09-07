@@ -32,5 +32,6 @@ public class Main {
 			}
 			System.out.println("Invalid : " + invalid);
 		}
+		scanner.close();
 	}
 }

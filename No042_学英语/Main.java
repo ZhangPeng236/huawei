@@ -10,6 +10,7 @@ public class Main {
 			long num = scanner.nextLong();
 			System.out.println(parse(num));
 		}
+		scanner.close();
 	}
 
 	public static String parse(long num) {
@@ -23,49 +24,35 @@ public class Main {
 		int num8 = (int) (num / 10000000 % 10);
 		int num9 = (int) (num / 100000000 % 10);
 
-		String string = "";
+		StringBuilder result = new StringBuilder();
 
 		if (num9 != 0 || num8 != 0 || num7 != 0) {
-			string += getThree(num9, num8, num7);
-			string += " million";
+			result.append(getThree(num9, num8, num7)).append(" million");
 			if (num6 != 0 || num5 != 0 && num4 != 0) {
-				string += " ";
-				string += getThree(num6, num5, num4);
-				string += " thousand";
-				if (num3 != 0) {
-					string += " ";
-					string += getThree(num3, num2, num1);
-				} else {
-					if (num2 != 0 || num1 != 0) {
-						string += " ";
-						string += getThree(num3, num2, num1);
-					}
+				result.append(" ").append(getThree(num6, num5, num4)).append(" thousand");
+				if (num3 != 0 || num2 != 0 || num1 != 0) {
+					result.append(" ").append(getThree(num3, num2, num1));
 				}
 			} else {
 				if (num3 != 0) {
-					string += " ";
-					string += getThree(num3, num2, num1);
+					result.append(" ").append(getThree(num3, num2, num1));
 				} else if (num2 != 0 || num1 != 0) {
-					string += " and ";
-					string += getThree(num3, num2, num1);
+					result.append(" and ").append(getThree(num3, num2, num1));
 				}
 			}
 		} else if (num6 != 0 || num5 != 0 || num4 != 0) {
-			string += getThree(num6, num5, num4);
-			string += " thousand";
+			result.append(getThree(num6, num5, num4)).append(" thousand");
 			if (num3 != 0) {
-				string += " ";
-				string += getThree(num3, num2, num1);
+				result.append(" ").append(getThree(num3, num2, num1));
 			} else if (num2 != 0 || num1 != 0) {
-				string += " and ";
-				string += getThree(num3, num2, num1);
+				result.append(" and ").append(getThree(num3, num2, num1));
 			}
 		} else if (num3 != 0 || num2 != 0 || num1 != 0) {
-			string += getThree(num3, num2, num1);
+			result.append(getThree(num3, num2, num1));
 		} else {
-			string = "zero";
+			result.append("zero");
 		}
-		return string;
+		return result.toString();
 	}
 
 	public static String getThree(int num3, int num2, int num1) {
@@ -74,31 +61,36 @@ public class Main {
 				"eighteen", "nineteen" };
 		String[] numShi = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
 				"ninety" };
-
-		String string = "";
-
-		if (num2 == 0) {
-			if (num1 != 0) {
-				string += numGe[num1];
-			}
-		} else if (num2 == 1) {
-			string += numTen[num1];
-		} else {
-			string += numShi[num2];
-			if (num1 != 0) {
-				string += " ";
-				string += numGe[num1];
-			}
-		}
-
+		StringBuilder string = new StringBuilder();
 		if (num3 != 0) {
-			String temp = string;
-			string = numGe[num3] + " hundred";
-			if (!(num2 == 0 && num1 == 0)) {
-				string += " and " + temp;
+			string.append(numGe[num3]).append(" hundred");
+			if (num2 != 0 || num1 != 0) {
+				string.append(" and ");
+				if (num2 == 0) {
+					string.append(numGe[num1]);
+				} else if (num2 == 1) {
+					string.append(numTen[num1]);
+				} else {
+					string.append(numShi[num2]);
+					if (num1 != 0) {
+						string.append(" ").append(numGe[num1]);
+					}
+				}
+			}
+		} else {
+			if (num2 == 0) {
+				if (num1 != 0) {
+					string.append(numGe[num1]);
+				}
+			} else if (num2 == 1) {
+				string.append(numTen[num1]);
+			} else {
+				string.append(numShi[num2]);
+				if (num1 != 0) {
+					string.append(" ").append(numGe[num1]);
+				}
 			}
 		}
-
-		return string;
+		return string.toString();
 	}
 }

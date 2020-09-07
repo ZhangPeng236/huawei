@@ -18,6 +18,7 @@ public class Main {
 			lists.put("backplane abort", "install first");
 			exec(command, lists);
 		}
+		scanner.close();
 	}
 
 	private static void exec(String command, LinkedHashMap<String, String> lists) {

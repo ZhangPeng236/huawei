@@ -31,5 +31,6 @@ public class Main_Key {
 			System.out.println(num < 4 ? num : top + 3);
 			System.out.println(cur);
 		}
+		scanner.close();
 	}
 }

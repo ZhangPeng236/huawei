@@ -6,9 +6,10 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNextInt()) {
-			int month = scanner.nextInt();
-			System.out.println(getTotalCount(month));
+			int monthCount = scanner.nextInt();
+			System.out.println(getTotalCount(monthCount));
 		}
+		scanner.close();
 	}
 
 	public static int getTotalCount(int monthCount) {

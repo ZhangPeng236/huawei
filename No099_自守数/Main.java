@@ -8,6 +8,7 @@ public class Main {
 		while (scanner.hasNextInt()) {
 			System.out.println(calcAutomorphicNumbers(scanner.nextInt()));
 		}
+		scanner.close();
 	}
 
 	public static int calcAutomorphicNumbers(int n) {

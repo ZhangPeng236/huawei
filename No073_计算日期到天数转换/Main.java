@@ -14,6 +14,7 @@ public class Main {
 			int day = scanner.nextInt();
 			System.out.println(iConverDateToDay(year, month, day));
 		}
+		scanner.close();
 	}
 
 	public static int iConverDateToDay(int year, int month, int day) {

@@ -62,5 +62,6 @@ public class Main_Key {
 				System.out.println(student.getName() + " " + student.getScore());
 			}
 		}
+		scanner.close();
 	}
 }

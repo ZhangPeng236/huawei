@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		while (scanner.hasNext()) {
+		while (scanner.hasNextLine()) {
 			String string = scanner.nextLine();
 			string.trim();
 			String[] strings = string.split(" ");
@@ -40,5 +40,6 @@ public class Main {
 				System.out.println(s);
 			}
 		}
+		scanner.close();
 	}
 }

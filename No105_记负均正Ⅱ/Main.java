@@ -22,9 +22,11 @@ public class Main {
 			}
 		}
 		System.out.println(count1);
-		if (count2 == 0)
+		if (count2 == 0) {
 			System.out.println(0);
-		else
+		} else {
 			System.out.printf("%.1f", sum / count2);
+		}
+		scanner.close();
 	}
 }

@@ -43,5 +43,6 @@ public class Main {
 				System.out.println(cur);
 			}
 		}
+		scanner.close();
 	}
 }

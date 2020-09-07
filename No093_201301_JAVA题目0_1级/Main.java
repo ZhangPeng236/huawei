@@ -14,6 +14,7 @@ public class Main {
 			}
 			System.out.println(result(src));
 		}
+		scanner.close();
 	}
 
 	private static boolean result(int[] src) {

@@ -10,8 +10,10 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNext()) {
-			method(scanner.next());
+			String src = scanner.next();
+			method(src);
 		}
+		scanner.close();
 	}
 
 	private static void method(String src) {

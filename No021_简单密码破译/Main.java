@@ -5,64 +5,68 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		String s = scanner.nextLine();
-		String newS = "";
-		char[] c = s.toCharArray();
-		for (int i = 0; i < c.length; i++) {
-			if (Character.isUpperCase(c[i])) {
-				if (c[i] == 'Z') {
-					c[i] = 'a';
+		while (scanner.hasNext()) {
+			String src = scanner.next();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < src.length(); i++) {
+				char temp = src.charAt(i);
+				if (Character.isUpperCase(temp)) {
+					if (temp == 'Z') {
+						sb.append('a');
+					} else {
+						sb.append((char) (temp + 1 + 32));
+					}
+				} else if (Character.isLowerCase(temp)) {
+					switch (temp) {
+					case 'a':
+					case 'b':
+					case 'c':
+						sb.append('2');
+						break;
+					case 'd':
+					case 'e':
+					case 'f':
+						sb.append('3');
+						break;
+					case 'g':
+					case 'h':
+					case 'i':
+						sb.append('4');
+						break;
+					case 'j':
+					case 'k':
+					case 'l':
+						sb.append('5');
+						break;
+					case 'm':
+					case 'n':
+					case 'o':
+						sb.append('6');
+						break;
+					case 'p':
+					case 'q':
+					case 'r':
+					case 's':
+						sb.append('7');
+						break;
+					case 't':
+					case 'u':
+					case 'v':
+						sb.append('8');
+						break;
+					case 'w':
+					case 'x':
+					case 'y':
+					case 'z':
+						sb.append('9');
+						break;
+					}
 				} else {
-					c[i] = (char) (Character.toLowerCase(c[i]) + 1);
-				}
-			} else if (Character.isLowerCase(c[i])) {
-				switch (c[i]) {
-				case 'a':
-				case 'b':
-				case 'c':
-					c[i] = '2';
-					break;
-				case 'd':
-				case 'e':
-				case 'f':
-					c[i] = '3';
-					break;
-				case 'g':
-				case 'h':
-				case 'i':
-					c[i] = '4';
-					break;
-				case 'j':
-				case 'k':
-				case 'l':
-					c[i] = '5';
-					break;
-				case 'm':
-				case 'n':
-				case 'o':
-					c[i] = '6';
-					break;
-				case 'p':
-				case 'q':
-				case 'r':
-				case 's':
-					c[i] = '7';
-					break;
-				case 't':
-				case 'u':
-				case 'v':
-					c[i] = '8';
-					break;
-				case 'w':
-				case 'x':
-				case 'y':
-				case 'z':
-					c[i] = '9';
-					break;
+					sb.append(temp);
 				}
 			}
-			newS += c[i];
+			System.out.println(sb);
 		}
-		System.out.println(newS);
+		scanner.close();
 	}
 }
