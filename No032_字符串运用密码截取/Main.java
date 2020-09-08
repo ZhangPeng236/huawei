@@ -8,9 +8,8 @@ public class Main {
 		while (scanner.hasNext()) {
 			String src = scanner.next();
 			wc: for (int max = src.length(); max > 0; max--) {
-				for (int j = 0; j < src.length() - max; j++) {
-					String temp = src.substring(j, j + max);
-					if (temp.equals(new StringBuilder(temp).reverse().toString())) {
+				for (int j = 0; j <= src.length() - max; j++) {
+					if (src.contains(new StringBuilder(src.substring(j, j + max)).reverse())) {
 						System.out.println(max);
 						break wc;
 					}

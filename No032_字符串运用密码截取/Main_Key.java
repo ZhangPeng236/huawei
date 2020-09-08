@@ -4,24 +4,24 @@ import java.util.Scanner;
 
 public class Main_Key {
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		while (in.hasNextLine()) {
-			String s = in.nextLine();
-			System.out.println(manacher(s));
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNextLine()) {
+			String src = scanner.nextLine();
+			System.out.println(manacher(src));
 		}
+		scanner.close();
 	}
 
-	public static int manacher(String s) {
-		int count = 0;// 记录最大回文
-		StringBuffer sb = new StringBuffer();
-		char[] c = s.toCharArray();
+	public static int manacher(String src) {
+		int count = 0;
+		StringBuilder sb = new StringBuilder();
+		char[] cs = src.toCharArray();
 		sb.append("#");
-		// 对字符串进行封装
-		for (int i = 0; i < c.length; i++) {
-			sb.append(c[i]);
+		for (int i = 0; i < cs.length; i++) {
+			sb.append(cs[i]);
 			sb.append("#");
 		}
-		int[] rad = new int[sb.length()];// 记录新字符串以每个字符为中心的最大回文半径
+		int[] rad = new int[sb.length()];
 		char[] cl = sb.toString().toCharArray();
 		int max = 0;// 记录已经搜寻到的回文半径能到达右端的最达大值
 		int id = 0;// 记录回文半径能到达最有端的回文字符串的中心
