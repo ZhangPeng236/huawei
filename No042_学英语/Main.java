@@ -23,9 +23,7 @@ public class Main {
 		int num7 = (int) (num / 1000000 % 10);
 		int num8 = (int) (num / 10000000 % 10);
 		int num9 = (int) (num / 100000000 % 10);
-
 		StringBuilder result = new StringBuilder();
-
 		if (num9 != 0 || num8 != 0 || num7 != 0) {
 			result.append(getThree(num9, num8, num7)).append(" million");
 			if (num6 != 0 || num5 != 0 && num4 != 0) {

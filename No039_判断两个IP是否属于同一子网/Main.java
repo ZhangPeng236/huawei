@@ -18,7 +18,6 @@ public class Main {
 		String[] masks = mask.split("\\.");
 		String[] ip1s = ip1.split("\\.");
 		String[] ip2s = ip2.split("\\.");
-
 		if (!(mask.equals("128.0.0.0") || mask.equals("192.0.0.0") || mask.equals("224.0.0.0")
 				|| mask.equals("240.0.0.0") || mask.equals("248.0.0.0") || mask.equals("252.0.0.0")
 				|| mask.equals("254.0.0.0") || mask.equals("255.0.0.0") || mask.equals("255.128.0.0")

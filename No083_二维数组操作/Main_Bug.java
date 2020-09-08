@@ -2,7 +2,7 @@ package No083_二维数组操作;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_Bug {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNextInt()) {
